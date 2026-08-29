@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Collection de Jeux PlayStation</title>
+    <style>
+        :root {
+            --ps-blue: #00439c;
+            --ps-dark: #1f1f1f;
+            --ps-light: #f5f5f5;
+            --ps4-color: #003791;
+            --ps5-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--ps-blue), #001f4d);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .filter-btn {
+            background-color: var(--ps-dark);
+            color: #fff;
+            border: 2px solid #444;
+            padding: 10px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--ps-blue);
+            border-color: #0072ce;
+            box-shadow: 0 0 10px rgba(0, 114, 206, 0.6);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px 20px;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .game-card {
+            background-color: var(--ps-dark);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 67, 156, 0.5);
+        }
+
+        .game-cover {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #222;
+        }
+
+        .game-info {
+            padding: 15px;
+            position: relative;
+        }
+
+        .game-title {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-ps4 {
+            background-color: var(--ps4-color);
+            color: #fff;
+        }
+
+        .badge-ps5 {
+            background-color: var(--ps5-color);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ma Collection PlayStation</h1>
+    </header>
+
+    <div class="container">
+        <!-- Boutons de filtrage -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterGames('all')">Tout</button>
+            <button class="filter-btn" onclick="filterGames('ps4')">PS4</button>
+            <button class="filter-btn" onclick="filterGames('ps5')">PS5</button>
+        </div>
+
+        <!-- Grille des jeux -->
+        <div class="game-grid" id="gameGrid">
+            
+            <!-- Exemple Jeu 1 (PS5) -->
+            <div class="game-card" data-platform="ps5">
+                <img src="https://placeholder.com" alt="Spider-Man 2" class="game-cover">
+                <div class="game-info">
+                    <p class="game-title">Spider-Man 2</p>
+                    <span class="badge badge-ps5">PS5</span>
+                </div>
+            </div>
+
+            <!-- Exemple Jeu 2 (PS4) -->
+            <div class="game-card" data-platform="ps4">
+                <img src="https://placeholder.com" alt="God of War" class="game-cover">
+                <div class="game-info">
+                    <p class="game-title">God of War</p>
+                    <span class="badge badge-ps4">PS4</span>
+                </div>
+            </div>
+
+            <!-- AJOUTEZ VOS NOUVEAUX JEUX ICI EN COPIANT LE MODÈLE CI-DESSUS -->
+
+        </div>
+    </div>
+
+    <script>
+        function filterGames(platform) {
+            // Gérer l'état actif des boutons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filtrer les cartes
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach(card => {
+                if (platform === 'all' || card.getAttribute('data-platform') === platform) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
